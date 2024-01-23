@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 volumes:
   kong_data: {}
@@ -85,7 +85,7 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-    
+
   db:
     image: postgres:9.5
     environment:
@@ -110,7 +110,6 @@ services:
     volumes:
       - kong_data:/var/lib/postgresql/data
 
- 
   konga-prepare:
     container_name: "konga_prepare"
     image: pantsel/konga
@@ -121,12 +120,11 @@ services:
     depends_on:
       - db
 
-  
   konga:
     image: pantsel/konga
     restart: always
     networks:
-        - kong-net
+      - kong-net
     environment:
       DB_ADAPTER: postgres
       TOKEN_SECRET: km1GUr4RkcQD7DewhJPNXrCuZwcKmqjb
@@ -135,8 +133,7 @@ services:
     depends_on:
       - db
     ports:
-      - "1337:1337"
-  
+      - ":1337"
 
 secrets:
   kong_postgres_password:
